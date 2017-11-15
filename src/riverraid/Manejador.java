@@ -64,11 +64,20 @@ public class Manejador {
     }
     
     /**
-     * Crea un nuevo bloque cada 32 pixeles en el eje de las X 
+     * Crea los bloques del nivel
      */
     public void crearNivel(){
-        for(int xx=0; xx < Juego.WIDTH+32 ; xx+=32){
-            addObject(new Bloque(xx,Juego.HEIGHT-64,ObjectId.Bloque));
+        
+        for(int yy=0; yy < Juego.HEIGHT+32 ; yy+=32){
+            addObject(new Bloque(0,yy,ObjectId.Bloque));
+        }
+        
+        for(int xx=0; xx < Juego.WIDTH*2 ; xx+=32){
+            addObject(new Bloque(xx,Juego.HEIGHT-32,ObjectId.Bloque));
+        }
+        
+        for(int xx=200; xx < 600 ; xx+=32){
+            addObject(new Bloque(xx,400,ObjectId.Bloque));
         }
     }
 }

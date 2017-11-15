@@ -8,6 +8,7 @@ import static Framework.ObjectId.Test;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import objetos.Bloque;
 import objetos.Jugador;
@@ -23,7 +24,8 @@ public class Juego extends Canvas implements Runnable{
     private Thread hilo;
     public static int WIDTH,HEIGHT;
     
- 
+    Camara cam;
+    
     Manejador manejador;
     
     /** 
@@ -33,6 +35,8 @@ public class Juego extends Canvas implements Runnable{
     public void init(){
         WIDTH = getWidth();
         HEIGHT = getHeight();
+        
+        cam = new Camara(0,0);
         
         manejador = new Manejador();
         
@@ -93,6 +97,12 @@ public class Juego extends Canvas implements Runnable{
     
     private void tick(){
         manejador.tick();
+        for(int i=0; i<manejador.object.size(); i++){  // recorre la lista de objetos que hay en el manejador
+            if(manejador.object.get(i).getID() == ObjectId.Jugador){  // si el objeto en el que se encuentra es igual al jugador
+                cam.tick(manejador.object.get(i)); // el objeto que se pasa por el parametro será el jugador
+            }
+        }
+        
     }
     
     /**
@@ -113,11 +123,22 @@ public class Juego extends Canvas implements Runnable{
         }
         Graphics g = bs.getDrawGraphics();
         
+        Graphics2D g2d = (Graphics2D) g; // castear la variable g y convertirlo en un objeto de tipo Graphics2D
+        
         ///////////////////////////////////////////////////////
         // DRAW HERE
         g.setColor(Color.black);
         g.fillRect(0, 0, getWidth(), getHeight());
-        manejador.render(g);
+        
+        //.translate: traslada el origen del contexto de Graphics2D a el punto x,y en el sistema actual de coordenadas
+        //modifica el contexto Graphics2D de modo tal que su nuevo origen corresponda al punto x,y
+        // todas las coordenadas usada en las operaciones de renderizado subsecuentes sobre este contexto gráfico son relativas a este nuevo origen
+        
+        g2d.translate(cam.getX(), cam.getY()); //inicio de la camara
+        
+        manejador.render(g);    // Es afectado por el inicio y el final de la camara
+        
+        g2d.translate(-cam.getX(), -cam.getY()); // final de la camara
         
         //////////////////////////////////////////////////////
         
