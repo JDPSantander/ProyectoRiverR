@@ -8,6 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+import riverraid.Manejador;
 
 /**
  *
@@ -18,9 +19,12 @@ public class Jugador extends GameObject {
     private float width = 48, height =96;
     private float gravedad = 0.5f;
     private final float MAXIMA_VELOCIDAD =10;
+    
+    Manejador handler;
 
-    public Jugador(float x, float y, ObjectId id) {
+    public Jugador(float x, float y, Manejador handler, ObjectId id) {
         super(x, y, id);
+        this.handler = handler;
     }
     
     /**
@@ -31,12 +35,35 @@ public class Jugador extends GameObject {
     @Override
     public void tick(LinkedList<GameObject> object) {
         x += velocidadX;
-        //y += velocidadY;
+        y += velocidadY;
         
         if( cayendo || saltando){
             velocidadY += gravedad;
             if(velocidadY>MAXIMA_VELOCIDAD){
                 velocidadY=MAXIMA_VELOCIDAD;
+            }
+        }
+        
+        colision(object);
+    }
+    
+    /**
+     * Recorre la lsita de juegos de objeto
+     * @param object recibe como parametro los objetos de la lista LinkedList de GameObject (objetos de juego creados por nosotros)
+     */
+    private void colision(LinkedList <GameObject> object){
+        
+        for(int i=0; i< handler.object.size(); i++){
+            GameObject tempObject = handler.object.get(i);  // Guarda en un objeto de juego temporal
+            
+            if(tempObject.getID() == ObjectId.Bloque){ // Si el objeto es un bloque...
+             
+                if(getBounds().intersects(tempObject.getBounds())){  // si los bordes del jugador intersectan con los bordes del bloque inferior...
+                    y=tempObject.getY() - height;  // para que el jugador quede justo encima del bloque y alinearlo con el piso
+                    velocidadY=0;   //velocidad del jugador en el eje Y = 0
+                    cayendo=false; // ya no está cayendo
+                    saltando=false; // no salta
+                }
             }
         }
     }

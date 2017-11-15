@@ -1,5 +1,6 @@
 
 package riverraid;
+import Framework.EntradaTeclado;
 import Framework.GameObject;
 import Framework.ObjectId;
 import static Framework.ObjectId.Bloque;
@@ -35,10 +36,11 @@ public class Juego extends Canvas implements Runnable{
         
         manejador = new Manejador();
         
-        manejador.addObject(new Jugador(100,100,ObjectId.Jugador));
+        manejador.addObject(new Jugador(100,100,manejador,ObjectId.Jugador));
         
         manejador.crearNivel();
         
+        this.addKeyListener(new EntradaTeclado(manejador));
     }
 
     public synchronized void iniciar(){
