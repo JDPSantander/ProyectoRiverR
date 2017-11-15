@@ -33,6 +33,11 @@ public class EntradaTeclado extends KeyAdapter{
                 if(key == KeyEvent.VK_A){  // si se presiona la tecla A
                     tempObject.setVelocidadX(-5);
                 }
+                if(key == KeyEvent.VK_SPACE && !tempObject.isSaltando()){ // si presiona espacio y no está saltando, salta (reduce posiciones en eje Y) 
+                    
+                    tempObject.setSaltando(true);
+                    tempObject.setVelocidadY(-10);
+                }
             }
         }
         

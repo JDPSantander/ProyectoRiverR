@@ -58,11 +58,27 @@ public class Jugador extends GameObject {
             
             if(tempObject.getID() == ObjectId.Bloque){ // Si el objeto es un bloque...
              
+                if(getBoundsArriba().intersects(tempObject.getBounds())){  // si los bordes del jugador intersectan con los bordes superiores...
+                    y=tempObject.getY() + 32;  // para que el jugador quede justo debajo del borde superior y choque
+                    velocidadY=0;   //velocidad del jugador en el eje Y = 0
+                   
+                }
+                
                 if(getBounds().intersects(tempObject.getBounds())){  // si los bordes del jugador intersectan con los bordes del bloque inferior...
                     y=tempObject.getY() - height;  // para que el jugador quede justo encima del bloque y alinearlo con el piso
                     velocidadY=0;   //velocidad del jugador en el eje Y = 0
                     cayendo=false; // ya no está cayendo
                     saltando=false; // no salta
+                }
+                else{  // si no está tocando el borde inferior, entonces está cayendo de nuevo y regresa a tocar el borde/piso
+                    cayendo=true;
+                }
+
+                if(getBoundsDerecha().intersects(tempObject.getBounds())){  // si los bordes del jugador intersectan con los bordes de la derecha...
+                    x=tempObject.getX() - width;  // para que el jugador choque con el borde derecho
+                }
+                if(getBoundsIzquierda().intersects(tempObject.getBounds())){  // si los bordes del jugador intersectan con los bordes de la izquierda...
+                    x=tempObject.getX() + 35;  // para que el jugador choque con el borde izquierdo 
                 }
             }
         }
@@ -78,12 +94,12 @@ public class Jugador extends GameObject {
        g.fillRect((int)x,(int)y,(int)width,(int)height);
        
        Graphics2D g2d = (Graphics2D) g;
-       
+       /*                       Para colorear los bordes del jugador para las colisiones
        g2d.setColor(Color.red);
-       g2d.draw(getBounds());
+       g2d.draw(getBounds());           
        g2d.draw(getBoundsDerecha());
        g2d.draw(getBoundsIzquierda());
-       g2d.draw(getBoundsArriba());
+       g2d.draw(getBoundsArriba()); */
     }
 
     @Override

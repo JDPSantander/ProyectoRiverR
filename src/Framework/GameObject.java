@@ -71,17 +71,17 @@ public abstract class GameObject {
         return id;
     }
     
-    public void isSaltando(boolean saltando){
+    public void setSaltando(boolean saltando){
         this.saltando=saltando;
     }
-    public void isCayendo(boolean cayendo){
+    public void setCayendo(boolean cayendo){
         this.cayendo=cayendo;
     }
     
-    public boolean getSaltando(){
+    public boolean isSaltando(){
         return saltando;
     }
-    public boolean getCayendo(){
+    public boolean isCayendo(){
         return cayendo;
     }
     
