@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import objetos.Bloque;
 import objetos.Jugador;
 import objetos.Prueba;
@@ -28,6 +29,8 @@ public class Juego extends Canvas implements Runnable{
     
     Manejador manejador;
     
+    private BufferedImage level = null;
+    
     /** 
      * Método para inicializar todo, es llamado antes de iniciar el hilo. Instancia el manejador y le añade el objeto 
      * de tipo GameObject
@@ -36,13 +39,20 @@ public class Juego extends Canvas implements Runnable{
         WIDTH = getWidth();
         HEIGHT = getHeight();
         
+        BufferedImageLoader loader = new BufferedImageLoader();
+        level = loader.loadImage("/nivel.png");  // cargando el nivel
+        
+        
         cam = new Camara(0,0);
         
         manejador = new Manejador();
         
-        manejador.addObject(new Jugador(100,100,manejador,ObjectId.Jugador));
         
-        manejador.crearNivel();
+        cargarImagenNivel(level);
+        
+       //manejador.addObject(new Jugador(100,100,manejador,ObjectId.Jugador));
+        
+        //manejador.crearNivel();
         
         this.addKeyListener(new EntradaTeclado(manejador));
     }
@@ -147,6 +157,35 @@ public class Juego extends Canvas implements Runnable{
         bs.show();
         
         
+    }
+    
+    private void cargarImagenNivel(BufferedImage image){
+        
+        int w= image.getWidth();
+        int h= image.getHeight();
+        
+        System.out.println("Anchura, Altura: " + w +" " +h);
+        
+        for(int xx= 0; xx<h; xx++){   // recorre cada uno de los pixeles de la imagen con sus dimensiones 
+            for(int yy=0; yy<w; yy++){
+                
+                int pixel = image.getRGB(xx,yy);  // retorna un entero de pixel en el modelo por defecto de color RGB
+                int rojo = (pixel >> 16) &0xff; 
+                int verde = (pixel >>8) &0xff;
+                int azul = (pixel) &0xff;
+                
+                //Para verificar si el pixel en el que nos encontramos es de color blanco (lo que supone son nuestros bloques)
+                if (rojo == 255 && verde == 255 && azul ==255){ //255 es el maximo valor en el espectro de colores
+                 
+                    manejador.addObject(new Bloque(xx*32, yy*32, ObjectId.Bloque)); // Agrega un bloque en cada pixel blanco
+                }    
+                //Para verificar si el pixel en el que nos encontramos es de color azul (lo que supone es nuestro jugador)
+                if (rojo == 0 && verde == 0 && azul ==255){ //esta combinación de colores es igual a azul puro
+                 
+                    manejador.addObject(new Jugador(xx*32, yy*32,manejador, ObjectId.Jugador)); // Agrega nuestro jugador (bloque azul) en el pixel azul
+                }    
+            }
+        }
     }
     
 }
