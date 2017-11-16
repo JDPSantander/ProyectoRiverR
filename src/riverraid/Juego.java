@@ -5,6 +5,7 @@ import Framework.GameObject;
 import Framework.ObjectId;
 import static Framework.ObjectId.Bloque;
 import static Framework.ObjectId.Test;
+import Framework.Texturas;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -25,11 +26,12 @@ public class Juego extends Canvas implements Runnable{
     private Thread hilo;
     public static int WIDTH,HEIGHT;
     
+    //Objetos
     Camara cam;
-    
     Manejador manejador;
-    
     private BufferedImage level = null;
+    static Texturas tex;
+    
     
     /** 
      * Método para inicializar todo, es llamado antes de iniciar el hilo. Instancia el manejador y le añade el objeto 
@@ -38,6 +40,8 @@ public class Juego extends Canvas implements Runnable{
     public void init(){
         WIDTH = getWidth();
         HEIGHT = getHeight();
+        
+        tex = new Texturas();
         
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/nivel.png");  // cargando el nivel
@@ -159,6 +163,11 @@ public class Juego extends Canvas implements Runnable{
         
     }
     
+    /**
+     * Carga la imagen del mapa de acuerdo a la estructura(imagen) hecha en paint con colores e identifica en el codigo los diferentes colores de cada pixel 
+     * de la imagen para colocar en esa ubicación (color) la imagen deseada 
+     * @param image Recibe la imagen del nivel hecha en paint
+     */
     private void cargarImagenNivel(BufferedImage image){
         
         int w= image.getWidth();
@@ -177,7 +186,7 @@ public class Juego extends Canvas implements Runnable{
                 //Para verificar si el pixel en el que nos encontramos es de color blanco (lo que supone son nuestros bloques)
                 if (rojo == 255 && verde == 255 && azul ==255){ //255 es el maximo valor en el espectro de colores
                  
-                    manejador.addObject(new Bloque(xx*32, yy*32, ObjectId.Bloque)); // Agrega un bloque en cada pixel blanco
+                    manejador.addObject(new Bloque(xx*32, yy*32,1, ObjectId.Bloque)); // Agrega un bloque en cada pixel blanco
                 }    
                 //Para verificar si el pixel en el que nos encontramos es de color azul (lo que supone es nuestro jugador)
                 if (rojo == 0 && verde == 0 && azul ==255){ //esta combinación de colores es igual a azul puro
@@ -186,6 +195,10 @@ public class Juego extends Canvas implements Runnable{
                 }    
             }
         }
+    }
+    
+    public static Texturas getInstancia(){
+        return tex;
     }
     
 }

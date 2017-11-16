@@ -3,11 +3,13 @@ package objetos;
 
 import Framework.GameObject;
 import Framework.ObjectId;
+import Framework.Texturas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+import riverraid.Juego;
 import riverraid.Manejador;
 
 /**
@@ -20,7 +22,9 @@ public class Jugador extends GameObject {
     private float gravedad = 0.5f;
     private final float MAXIMA_VELOCIDAD =10;
     
-    Manejador handler;
+    private Manejador handler;
+    
+    Texturas tex = Juego.getInstancia();
 
     public Jugador(float x, float y, Manejador handler, ObjectId id) {
         super(x, y, id);
@@ -90,10 +94,13 @@ public class Jugador extends GameObject {
      */
     public void render(Graphics g) {
         
+        g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen)
+        
+       /* para pintar el rectangulo azul que es nuestro viejo jugador
        g.setColor(Color.blue);
        g.fillRect((int)x,(int)y,(int)width,(int)height);
        
-       Graphics2D g2d = (Graphics2D) g;
+       Graphics2D g2d = (Graphics2D) g; */
        /*                       Para colorear los bordes del jugador para las colisiones
        g2d.setColor(Color.red);
        g2d.draw(getBounds());           

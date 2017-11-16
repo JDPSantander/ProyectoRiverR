@@ -66,6 +66,7 @@ public class Manejador {
     /**
      * Crea los bloques del nivel
      */
+    /*
     public void crearNivel(){
         
         for(int yy=0; yy < Juego.HEIGHT+32 ; yy+=32){
@@ -79,5 +80,5 @@ public class Manejador {
         for(int xx=200; xx < 600 ; xx+=32){
             addObject(new Bloque(xx,400,ObjectId.Bloque));
         }
-    }
+    }*/
 }
