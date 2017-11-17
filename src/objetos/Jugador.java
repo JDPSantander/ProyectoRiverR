@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+import riverraid.Animacion;
 import riverraid.Juego;
 import riverraid.Manejador;
 
@@ -25,10 +26,16 @@ public class Jugador extends GameObject {
     private Manejador handler;
     
     Texturas tex = Juego.getInstancia();
+    
+    private Animacion jugadorCaminando;
+    
 
     public Jugador(float x, float y, Manejador handler, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
+        
+        // 10 es la velocidad con que esta animación se repetirá, puede ser modificado a conveniencia 
+        jugadorCaminando = new Animacion(10, tex.jugador[1],tex.jugador[2],tex.jugador[3],tex.jugador[4],tex.jugador[5],tex.jugador[6]);
     }
     
     /**
@@ -49,6 +56,9 @@ public class Jugador extends GameObject {
         }
         
         colision(object);
+        
+       jugadorCaminando.correrAnimacion();
+        
     }
     
     /**
@@ -94,10 +104,17 @@ public class Jugador extends GameObject {
      */
     public void render(Graphics g) {
         
-        g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen)
+        g.setColor(Color.blue);
+        if(velocidadX !=0){ // si se está moviendo, mostrar la animación correspondiente...
+            jugadorCaminando.dibujarAnimacion(g, (int)x, (int)y,48,96);  //48 y 96 son la escala, para adaptar la imagen
+        }else{ // si no, muestra la imagen de cuando está quieto
+           g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen) 
+        }
+        
+        
         
        /* para pintar el rectangulo azul que es nuestro viejo jugador
-       g.setColor(Color.blue);
+       
        g.fillRect((int)x,(int)y,(int)width,(int)height);
        
        Graphics2D g2d = (Graphics2D) g; */

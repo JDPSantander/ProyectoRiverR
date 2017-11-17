@@ -24,8 +24,8 @@ public class SpriteSheet {
      * Recibe por parametro las filas, columnas, ancho y alto que querramos de la imagen del spritesheet 
      * y subdivide la imagen que se encuentra en los limites que le hemos dado por parametro
      * Cada columna y fila hace una referencia a la ubicación en pixeles de la imagen
-     * @param columnas la columna que queremos
-     * @param filas pixel de esa fila
+     * @param columnas la columna donde se ubica el primer pixel a la izquierda de la imagen 
+     * @param filas la fila donde se ubica el primer pixel arriba de la imagen
      * @param ancho
      * @param alto
      * @return regresa la subimagen que deseamos del spritesheet
