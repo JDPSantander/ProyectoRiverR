@@ -29,7 +29,7 @@ public class Juego extends Canvas implements Runnable{
     //Objetos
     Camara cam;
     Manejador manejador;
-    private BufferedImage level = null;
+    private BufferedImage level = null;// fondo = null;
     static Texturas tex;
     
     
@@ -45,6 +45,7 @@ public class Juego extends Canvas implements Runnable{
         
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/nivel.png");  // cargando el nivel
+        //fondo = loader.loadImage("/back_1.png");
         
         
         cam = new Camara(0,0);
