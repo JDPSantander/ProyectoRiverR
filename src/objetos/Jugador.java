@@ -22,20 +22,27 @@ public class Jugador extends GameObject {
     private float width = 48, height =96;
     private float gravedad = 0.5f;
     private final float MAXIMA_VELOCIDAD =10;
+    //private int facing = 1;  V15, animaciones
+    // 1 = derecha
+    // -1 = izquierda
     
     private Manejador handler;
     
     Texturas tex = Juego.getInstancia();
     
-    //private Animacion jugadorCaminando;
+    //V13 Y V15, OJO: PARA ANIMACIONES
+    //private Animacion jugadorCaminando, avionIzquierda, avionDerecha, avionSaltando;
     
 
     public Jugador(float x, float y, Manejador handler, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
         
+        
+        //OJO: V13 Y V15 ANIMACIONES
         // 10 es la velocidad con que esta animación se repetirá, puede ser modificado a conveniencia 
         //jugadorCaminando = new Animacion(10, tex.jugador[1],tex.jugador[2],tex.jugador[3],tex.jugador[4],tex.jugador[5],tex.jugador[6]);
+        //avionIzquierda = new Animacion(10, tex.jugador[7],tex.jugador[8],tex.jugador[9],tex.jugador[10],tex.jugador[11],tex.jugador[12]);
     }
     
     /**
@@ -48,6 +55,16 @@ public class Jugador extends GameObject {
         x += velocidadX;
         y--;    // Mueve el avion automaticamente hacia arriba 
         y += velocidadY;
+        
+        //V15: MAS DE ANIMACIONES
+        
+        /*
+         if(velX<0{   // si se está moviendo hacia la izquierda...
+            facing = -1;
+         }else if(velX >0){   // si se está moviendo hacia la derecha...
+            facing = 1;
+         }
+        */
         
         
         //y += velocidadY;   // Para mover el avion manualmente hacia arriba
@@ -63,6 +80,7 @@ public class Jugador extends GameObject {
         colision(object);
         
        //jugadorCaminando.correrAnimacion();
+       //avionIzquierda.correrAnimacion();
        
     }
     
@@ -109,12 +127,36 @@ public class Jugador extends GameObject {
      */
     public void render(Graphics g) {
         
+        //if(jumping){
+                // if(facing==1){
+                        //g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  //tex.jugador[numero] será la imagen
+                //} else if(facing== -1){
+                        //g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  //tex.jugador[numero] será la imagen
+                //}          
+        //} else{
+        
+            //COPIAR AQUÍ TODO EL CODIGO QUE ESTÁ ABAJO
+            
+        //}
+        
         g.setColor(Color.blue);
        // if(velocidadX !=0){ // si se está moviendo, mostrar la animación correspondiente...
-           // jugadorCaminando.dibujarAnimacion(g, (int)x, (int)y,48,96);  //48 y 96 son la escala, para adaptar la imagen
+            //if(facing==1){  // V15 ANIMACIONES
+                // jugadorCaminando.dibujarAnimacion(g, (int)x, (int)y,48,96);  //48 y 96 son la escala, para adaptar la imagen
+            //}else{
+                // avionIzquierda.dibujarAnimacion(g, (int)x, (int)y,48,96);
+            //}
+                
         //}else{ // si no, muestra la imagen de cuando está quieto
             // AVION NORMAL
+            //if (facing==1){
            g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen) 
+           
+            //} else if(facing == -1){
+               // imagen de cuando está mirando hacia la izquierda
+            //}
+            
+            
         //}
         //g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);
         
