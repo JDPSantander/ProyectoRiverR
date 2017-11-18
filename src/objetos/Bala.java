@@ -14,14 +14,14 @@ import java.util.LinkedList;
  */
 public class Bala extends GameObject{
 
-    public Bala(float x, float y, ObjectId id, int velocidadX) {
+    public Bala(float x, float y, ObjectId id, int velocidadY) {
         super(x, y, id);
-        this.velocidadX = velocidadX;
+        this.velocidadY = velocidadY;
     }
 
     @Override
     public void tick(LinkedList<GameObject> object) {
-        x += velocidadX;
+        y += velocidadY;
         
     }
 

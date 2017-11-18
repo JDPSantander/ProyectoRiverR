@@ -46,7 +46,7 @@ public class EntradaTeclado extends KeyAdapter{
                 if(key == KeyEvent.VK_SPACE){ 
                     //despues del getX() y getY() se pueden restar o sumar valores para ajustar la posicion inicial de donde saldrá la bala
                     //despues de getDireccion() se multiplica por el valor que queremos que sea nuestra velocidad de disparo (10, por ejemplo)
-                    handler.addObject(new Bala(tempObject.getX(),tempObject.getY(),ObjectId.Bala,tempObject.getDireccion()*10));
+                    handler.addObject(new Bala(tempObject.getX()+16,tempObject.getY(),ObjectId.Bala,tempObject.getDireccion()*10));
                 }
                
             }
