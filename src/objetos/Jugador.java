@@ -39,27 +39,31 @@ public class Jugador extends GameObject {
     }
     
     /**
-     * Mueve la caja en los ejes X o Y. 2) verifica si el jugador está cayendo o saltando para crear el efecto de gravedad
+     * Mueve al avión en los ejes X o Y. 
      * @param object recibe el objeto que se moverá 
      */
     
     @Override
     public void tick(LinkedList<GameObject> object) {
         x += velocidadX;
-        //y += velocidadY;   // Para mover el avion manualmente hacia arriba
         y--;    // Mueve el avion automaticamente hacia arriba 
+        y += velocidadY;
         
+        
+        //y += velocidadY;   // Para mover el avion manualmente hacia arriba
+        
+        /* Verifica si el avion está cayendo o saltando para crear el efecto de gravedad
         if( cayendo || saltando){
             velocidadY += gravedad;
             if(velocidadY>MAXIMA_VELOCIDAD){
                 velocidadY=MAXIMA_VELOCIDAD;
             }
-        }
+        }*/
         
         colision(object);
         
        //jugadorCaminando.correrAnimacion();
-        
+       
     }
     
     /**
