@@ -29,7 +29,7 @@ public class Juego extends Canvas implements Runnable{
     //Objetos
     Camara cam;
     Manejador manejador;
-    private BufferedImage level = null;// fondo = null;
+    private BufferedImage level = null, fondo = null; //  clouds = null; (14V)
     static Texturas tex;
     
     
@@ -45,7 +45,7 @@ public class Juego extends Canvas implements Runnable{
         
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/nivel.png");  // cargando el nivel
-        //fondo = loader.loadImage("/back_1.png");
+        fondo = loader.loadImage("/back_1.png"); //(14V)
         
         
         cam = new Camara(0,0);
@@ -129,7 +129,6 @@ public class Juego extends Canvas implements Runnable{
      * para tenerlas listas al momento de ser necesitadas
      * 
      */
-    
     private void render(){
         BufferStrategy bs = this.getBufferStrategy();
         if(bs==null){
@@ -141,17 +140,27 @@ public class Juego extends Canvas implements Runnable{
         Graphics2D g2d = (Graphics2D) g; // castear la variable g y convertirlo en un objeto de tipo Graphics2D
         
         ///////////////////////////////////////////////////////
-        // DRAW HERE
-        g.setColor(Color.black);
+        // DIBUJAR AQUI
+        
+        
+        g.setColor(new Color(25,191,224));  // creando nuevo color del fondo (14V)
         g.fillRect(0, 0, getWidth(), getHeight());
+        //g.drawImage(fondo, 0, 0, this);   // Dibuja el fondo de forma estática. 0,0 son las posiciones en la pantalla
         
         //.translate: traslada el origen del contexto de Graphics2D a el punto x,y en el sistema actual de coordenadas
         //modifica el contexto Graphics2D de modo tal que su nuevo origen corresponda al punto x,y
         // todas las coordenadas usada en las operaciones de renderizado subsecuentes sobre este contexto gráfico son relativas a este nuevo origen
         
         g2d.translate(cam.getX(), cam.getY()); //inicio de la camara
-        
+         //Pinta el fondo tantas veces en X y Y como querramos, tomando en cuenta el ancho y alto de la imagen para repetirla sin superponerlas
+        for(int xx=0; xx<fondo.getWidth()*50; xx+= fondo.getWidth()){
+            for(int yy=0; yy<fondo.getHeight()*50; yy+= fondo.getHeight()){
+                g.drawImage(fondo, xx, yy, this);
+            }
+               
+        }
         manejador.render(g);    // Es afectado por el inicio y el final de la camara
+       
         
         g2d.translate(-cam.getX(), -cam.getY()); // final de la camara
         
@@ -166,7 +175,8 @@ public class Juego extends Canvas implements Runnable{
     
     /**
      * Carga la imagen del mapa de acuerdo a la estructura(imagen) hecha en paint con colores e identifica en el codigo los diferentes colores de cada pixel 
-     * de la imagen para colocar en esa ubicación (color) la imagen deseada 
+     * de la imagen para colocar en esa ubicación (color) la imagen deseada. Esta imagen hecha en paint debe tener un tamaño
+     * de potencias de 2, y debe ser cuadrada (512 x 512, por ejemplo) para funcionar.
      * @param image Recibe la imagen del nivel hecha en paint
      */
     private void cargarImagenNivel(BufferedImage image){
