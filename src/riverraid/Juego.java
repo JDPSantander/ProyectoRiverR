@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import objetos.Bloque;
 import objetos.Jugador;
 import objetos.Prueba;
+import objetos.Puerta;
 
 /**
  *
@@ -29,9 +30,10 @@ public class Juego extends Canvas implements Runnable{
     //Objetos
     Camara cam;
     Manejador manejador;
-    private BufferedImage level = null, fondo = null; //  clouds = null; (14V)
+    public BufferedImage level = null, fondo = null; //  clouds = null; (14V)
     static Texturas tex;
     
+    public static int NIVEL =1;
     
     /** 
      * Método para inicializar todo, es llamado antes de iniciar el hilo. Instancia el manejador y le añade el objeto 
@@ -50,10 +52,10 @@ public class Juego extends Canvas implements Runnable{
         
         cam = new Camara(0,0);
         
-        manejador = new Manejador();
+        manejador = new Manejador(cam);
         
         
-        cargarImagenNivel(level);
+        manejador.cargarImagenNivel(level);
         
        //manejador.addObject(new Jugador(100,100,manejador,ObjectId.Jugador));
         
@@ -172,45 +174,7 @@ public class Juego extends Canvas implements Runnable{
         
         
     }
-    
-    /**
-     * Carga la imagen del mapa de acuerdo a la estructura(imagen) hecha en paint con colores e identifica en el codigo los diferentes colores de cada pixel 
-     * de la imagen para colocar en esa ubicación (color) la imagen deseada. Esta imagen hecha en paint debe tener un tamaño
-     * de potencias de 2, y debe ser cuadrada (512 x 512, por ejemplo) para funcionar.
-     * @param image Recibe la imagen del nivel hecha en paint
-     */
-    private void cargarImagenNivel(BufferedImage image){
-        
-        int w= image.getWidth();
-        int h= image.getHeight();
-        
-        System.out.println("Anchura, Altura: " + w +" " +h);
-        
-        for(int xx= 0; xx<h; xx++){   // recorre cada uno de los pixeles de la imagen con sus dimensiones 
-            for(int yy=0; yy<w; yy++){
-                
-                int pixel = image.getRGB(xx,yy);  // retorna un entero de pixel en el modelo por defecto de color RGB
-                int rojo = (pixel >> 16) &0xff; 
-                int verde = (pixel >>8) &0xff;
-                int azul = (pixel) &0xff;
-                
-                //Para verificar si el pixel en el que nos encontramos es de color blanco (lo que supone son nuestros bloques)
-                if (rojo == 255 && verde == 255 && azul ==255){ //255 es el maximo valor en el espectro de colores
-                 
-                    manejador.addObject(new Bloque(xx*32, yy*32,1, ObjectId.Bloque)); // Agrega un bloque en cada pixel blanco
-                }    
-                //Para verificar si el pixel en el que nos encontramos es de color azul (lo que supone es nuestro jugador)
-                if (rojo == 0 && verde == 0 && azul ==255){ //esta combinación de colores es igual a azul puro
-                 
-                    manejador.addObject(new Jugador(xx*32, yy*32,manejador, ObjectId.Jugador)); // Agrega nuestro jugador (bloque azul) en el pixel azul
-                }    
-                /*if (rojo == 34 && verde == 177 && azul ==76){ //esta combinación de colores es igual a azul puro
-                 
-                    manejador.addObject(new Bloque(xx*32, yy*32,1, ObjectId.Bloque)); // Agrega nuestro jugador (bloque azul) en el pixel azul
-                } */
-            }
-        }
-    }
+   
     
     public static Texturas getInstancia(){
         return tex;

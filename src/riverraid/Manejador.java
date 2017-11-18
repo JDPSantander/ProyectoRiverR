@@ -4,8 +4,11 @@ package riverraid;
 import Framework.GameObject;
 import Framework.ObjectId;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import objetos.Bloque;
+import objetos.Jugador;
+import objetos.Puerta;
 
 /**
  *
@@ -20,6 +23,17 @@ public class Manejador {
     public LinkedList<GameObject> object = new LinkedList <GameObject>();
     
     private GameObject tempObject;
+    private Camara cam;
+    private BufferedImage level2 =null;
+    
+    
+    
+    public Manejador(Camara cam){
+        this.cam=cam;
+        
+        BufferedImageLoader loader = new BufferedImageLoader();
+        level2 = loader.loadImage("/nivel2.png");  // cargando el nivel
+    }
     
     /**
      * Instancia el objeto de tipo GameObject que se ha creado de manera auxiliar recorriendo los objetos de juego 
@@ -46,6 +60,51 @@ public class Manejador {
         }
     }
     
+     
+    /**
+     * Carga la imagen del mapa de acuerdo a la estructura(imagen) hecha en paint con colores e identifica en el codigo los diferentes colores de cada pixel 
+     * de la imagen para colocar en esa ubicación (color) la imagen deseada. Esta imagen hecha en paint debe tener un tamaño
+     * de potencias de 2, y debe ser cuadrada (512 x 512, por ejemplo) para funcionar.
+     * @param image Recibe la imagen del nivel hecha en paint
+     */
+    public void cargarImagenNivel(BufferedImage image){
+        
+        int w= image.getWidth();
+        int h= image.getHeight();
+        
+        System.out.println("Anchura, Altura: " + w +" " +h);
+        
+        for(int xx= 0; xx<h; xx++){   // recorre cada uno de los pixeles de la imagen con sus dimensiones 
+            for(int yy=0; yy<w; yy++){
+                
+                int pixel = image.getRGB(xx,yy);  // retorna un entero de pixel en el modelo por defecto de color RGB
+                int rojo = (pixel >> 16) &0xff; 
+                int verde = (pixel >>8) &0xff;
+                int azul = (pixel) &0xff;
+                
+                //Para verificar si el pixel en el que nos encontramos es de color blanco (lo que supone son nuestros bloques)
+                if (rojo == 255 && verde == 255 && azul ==255){ //255 es el maximo valor en el espectro de colores
+                 
+                    addObject(new Bloque(xx*32, yy*32,1, ObjectId.Bloque)); // Agrega un bloque en cada pixel blanco
+                }    
+                //Para verificar si el pixel en el que nos encontramos es de color azul (lo que supone es nuestro jugador)
+                if (rojo == 0 && verde == 0 && azul ==255){ //esta combinación de colores es igual a azul puro
+                 
+                    addObject(new Jugador(xx*32, yy*32,this,cam, ObjectId.Jugador)); // Agrega nuestro jugador (bloque azul) en el pixel azul
+                }
+                if (rojo == 255 && verde == 242 && azul ==0){ //punto amarillo de la puerta para pasar de nivel
+                 
+                    addObject(new Puerta(xx*32, yy*32, ObjectId.Puerta)); // Agrega nuestro jugador (bloque azul) en el pixel azul
+                }
+                
+                /*if (rojo == 34 && verde == 177 && azul ==76){ //esta combinación de colores es igual a azul puro
+                 
+                    manejador.addObject(new Bloque(xx*32, yy*32,1, ObjectId.Bloque)); // Agrega nuestro jugador (bloque azul) en el pixel azul
+                } */
+            }
+        }
+    }
+    
     /**
      * Método para añadir objetos a nuestra lista de objetos de tipo GameObject
      * @param object recibe el objeto a añadir como parametro
@@ -61,6 +120,31 @@ public class Manejador {
     public void removeObject(GameObject object){
         this.object.remove(object);
         
+    }
+    
+    public void cambiarNivel(){
+        limpiarNivel();
+        cam.setX(0);
+        
+        switch(Juego.NIVEL){
+            case 1:{
+                
+                cargarImagenNivel(level2);
+                
+                
+                break;
+            }
+        }
+        Juego.NIVEL++;
+    }
+    
+    
+    
+    /**
+     * Remueve todos los objetos que estén en la pantalla
+     */
+    private void limpiarNivel(){
+        object.clear();
     }
     
     /**

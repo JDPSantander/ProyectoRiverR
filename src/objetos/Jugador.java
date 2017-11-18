@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import riverraid.Animacion;
+import riverraid.Camara;
 import riverraid.Juego;
 import riverraid.Manejador;
 
@@ -27,6 +28,7 @@ public class Jugador extends GameObject {
     // -1 = izquierda
     
     private Manejador handler;
+    private Camara cam;
     
     Texturas tex = Juego.getInstancia();
     
@@ -34,10 +36,10 @@ public class Jugador extends GameObject {
     //private Animacion jugadorCaminando, avionIzquierda, avionDerecha, avionSaltando;
     
 
-    public Jugador(float x, float y, Manejador handler, ObjectId id) {
+    public Jugador(float x, float y, Manejador handler, Camara cam, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
-        
+        this.cam=cam;
         
         //OJO: V13 Y V15 ANIMACIONES
         // 10 es la velocidad con que esta animación se repetirá, puede ser modificado a conveniencia 
@@ -117,6 +119,13 @@ public class Jugador extends GameObject {
                 if(getBoundsIzquierda().intersects(tempObject.getBounds())){  // si los bordes del jugador intersectan con los bordes de la izquierda...
                     x=tempObject.getX() + 35;  // para que el jugador choque con el borde izquierdo 
                 }
+            } else if(tempObject.getID() == ObjectId.Puerta){  // si el objeto, con el que se encuentra el avion, es una puerta
+                //CAMBIA DE NIVEL
+                if(getBounds().intersects(tempObject.getBounds())){ // si el avion intersecta los bordes de la puerta...
+                   handler.cambiarNivel();  
+                   
+                }
+                
             }
         }
     }
