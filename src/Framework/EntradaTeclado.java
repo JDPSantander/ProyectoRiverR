@@ -3,6 +3,7 @@ package Framework;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import objetos.Bala;
 import riverraid.Manejador;
 
 /**
@@ -41,6 +42,11 @@ public class EntradaTeclado extends KeyAdapter{
                 if(key == KeyEvent.VK_W){
                     int y=0;
                     tempObject.setVelocidadY(-3);
+                }
+                if(key == KeyEvent.VK_SPACE){ 
+                    //despues del getX() y getY() se pueden restar o sumar valores para ajustar la posicion inicial de donde saldrá la bala
+                    //despues de getDireccion() se multiplica por el valor que queremos que sea nuestra velocidad de disparo (10, por ejemplo)
+                    handler.addObject(new Bala(tempObject.getX(),tempObject.getY(),ObjectId.Bala,tempObject.getDireccion()*10));
                 }
                
             }

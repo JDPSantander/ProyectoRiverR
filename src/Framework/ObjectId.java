@@ -8,7 +8,8 @@ package Framework;
 public enum ObjectId {
     Jugador(),
     Test(),
-    Bloque();
+    Bloque(),
+    Bala();
     
     
     

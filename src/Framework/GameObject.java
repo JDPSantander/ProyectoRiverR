@@ -16,7 +16,7 @@ public abstract class GameObject {
     protected float velocidadX =0 , velocidadY = 0;
     protected boolean cayendo = true;
     protected boolean saltando = false;
-    
+    protected int direccion = -1;  //V16 facing
     
     public GameObject(float x, float y, ObjectId id){
         this.x=x;
@@ -85,6 +85,8 @@ public abstract class GameObject {
         return cayendo;
     }
     
-    
+    public int getDireccion(){
+        return direccion;
+    }
     
 }
