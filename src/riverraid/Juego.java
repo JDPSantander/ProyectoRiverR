@@ -194,6 +194,10 @@ public class Juego extends Canvas implements Runnable{
                  
                     manejador.addObject(new Jugador(xx*32, yy*32,manejador, ObjectId.Jugador)); // Agrega nuestro jugador (bloque azul) en el pixel azul
                 }    
+                /*if (rojo == 34 && verde == 177 && azul ==76){ //esta combinación de colores es igual a azul puro
+                 
+                    manejador.addObject(new Bloque(xx*32, yy*32,1, ObjectId.Bloque)); // Agrega nuestro jugador (bloque azul) en el pixel azul
+                } */
             }
         }
     }

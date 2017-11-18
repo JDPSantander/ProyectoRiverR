@@ -46,7 +46,8 @@ public class Jugador extends GameObject {
     @Override
     public void tick(LinkedList<GameObject> object) {
         x += velocidadX;
-        y += velocidadY;
+        //y += velocidadY;   // Para mover el avion manualmente hacia arriba
+        y--;    // Mueve el avion automaticamente hacia arriba 
         
         if( cayendo || saltando){
             velocidadY += gravedad;
@@ -108,14 +109,15 @@ public class Jugador extends GameObject {
        // if(velocidadX !=0){ // si se está moviendo, mostrar la animación correspondiente...
            // jugadorCaminando.dibujarAnimacion(g, (int)x, (int)y,48,96);  //48 y 96 son la escala, para adaptar la imagen
         //}else{ // si no, muestra la imagen de cuando está quieto
-        //   g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen) 
+            // AVION NORMAL
+           g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen) 
         //}
-        
+        //g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);
         
         
        /* para pintar el rectangulo azul que es nuestro viejo jugador
        */
-       g.fillRect((int)x,(int)y,(int)width,(int)height);
+       //g.fillRect((int)x,(int)y,(int)width,(int)height);
        
        //Graphics2D g2d = (Graphics2D) g; 
        /*                       Para colorear los bordes del jugador para las colisiones

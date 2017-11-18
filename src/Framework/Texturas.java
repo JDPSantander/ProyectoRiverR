@@ -38,8 +38,11 @@ public class Texturas {
     }
     
     public void getTexturas(){
+        //columnas,fila, ancho, alto
         bloque[0] = bs.agarrarImagen(744, 69, 74, 90);//bloques (tronco)
         bloque[1] = bs.agarrarImagen(609, 60, 93, 99); //bloques (piedra)
-        jugador[0] = ps.agarrarImagen(1, 2, 32, 64); // aviones
+        //1,0,61,109 son coordenadas del avión comunista
+        
+        jugador[0] = ps.agarrarImagen(1, 0, 61, 109); // aviones
     }
 }

@@ -38,6 +38,7 @@ public class EntradaTeclado extends KeyAdapter{
                     tempObject.setSaltando(true);
                     tempObject.setVelocidadY(-10);
                 }
+               
             }
         }
         
