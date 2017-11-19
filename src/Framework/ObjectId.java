@@ -10,7 +10,8 @@ public enum ObjectId {
     Test(),
     Bloque(),
     Bala(),
-    Puerta();
+    Puerta(),
+    Enemigos();
     
     
     

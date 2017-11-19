@@ -6,9 +6,12 @@ import Framework.ObjectId;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.Random;
 import objetos.Bloque;
+import objetos.Enemigos;
 import objetos.Jugador;
 import objetos.Puerta;
+import objetos.Vidas;
 
 /**
  *
@@ -25,7 +28,8 @@ public class Manejador {
     private GameObject tempObject;
     private Camara cam;
     private BufferedImage level2 =null;
-    
+    //private Random random,random2;
+    //private Vidas vida;
     
     
     public Manejador(Camara cam){
@@ -33,6 +37,8 @@ public class Manejador {
         
         BufferedImageLoader loader = new BufferedImageLoader();
         level2 = loader.loadImage("/nivel2.png");  // cargando el nivel
+        
+        //vida = new Vidas();
     }
     
     /**
@@ -95,6 +101,14 @@ public class Manejador {
                 if (rojo == 255 && verde == 242 && azul ==0){ //punto amarillo de la puerta para pasar de nivel
                  
                     addObject(new Puerta(xx*32, yy*32, ObjectId.Puerta)); // Agrega nuestro jugador (bloque azul) en el pixel azul
+                }
+                if (rojo == 255 && verde == 128 && azul ==0){
+                    //random = new Random();
+                    
+                    //for(int i=0; i<20; i++){
+                        addObject(new Enemigos(xx*32, yy*32, ObjectId.Enemigos));
+                    //}
+                    
                 }
                 
                 /*if (rojo == 34 && verde == 177 && azul ==76){ //esta combinación de colores es igual a azul puro
