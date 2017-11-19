@@ -11,7 +11,8 @@ public enum ObjectId {
     Bloque(),
     Bala(),
     Puerta(),
-    Enemigos();
+    Enemigos(),
+    Vidas();
     
     
     

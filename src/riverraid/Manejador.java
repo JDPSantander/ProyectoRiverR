@@ -110,6 +110,9 @@ public class Manejador {
                     //}
                     
                 }
+                if( rojo == 34 && verde == 177 && azul == 76){
+                    addObject(new Vidas(xx*32,yy*32,this,cam,ObjectId.Vidas));
+                }
                 
                 /*if (rojo == 34 && verde == 177 && azul ==76){ //esta combinación de colores es igual a azul puro
                  

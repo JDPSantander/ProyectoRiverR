@@ -33,7 +33,7 @@ public class Juego extends Canvas implements Runnable{
     Manejador manejador;
     public BufferedImage level = null, fondo = null; //  clouds = null; (14V)
     static Texturas tex;
-    private Vidas vida;
+    //private Vidas vida;
     
     public static int NIVEL =1;
     
@@ -55,7 +55,7 @@ public class Juego extends Canvas implements Runnable{
         cam = new Camara(0,0);
         
         manejador = new Manejador(cam);
-        vida = new Vidas();
+       //vida = new Vidas();
         
         manejador.cargarImagenNivel(level);
         
@@ -116,7 +116,7 @@ public class Juego extends Canvas implements Runnable{
     
     private void tick(){
         manejador.tick();
-        vida.tick(); // agregando el timer de la vida
+        //vida.tick(); // agregando el timer de la vida
         for(int i=0; i<manejador.object.size(); i++){  // recorre la lista de objetos que hay en el manejador
             if(manejador.object.get(i).getID() == ObjectId.Jugador){  // si el objeto en el que se encuentra es igual al jugador
                 cam.tick(manejador.object.get(i)); // el objeto que se pasa por el parametro será el jugador
@@ -167,7 +167,7 @@ public class Juego extends Canvas implements Runnable{
                
         }
         manejador.render(g);    // Es afectado por el inicio y el final de la camara
-        vida.render(g);
+        //vida.render(g);
         
         g2d.translate(-cam.getX(), -cam.getY()); // final de la camara
         

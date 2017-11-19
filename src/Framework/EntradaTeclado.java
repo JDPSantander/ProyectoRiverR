@@ -50,6 +50,32 @@ public class EntradaTeclado extends KeyAdapter{
                 }
                
             }
+            //Para mover las vidas al mismo tiempo que el avión
+            if(tempObject.getID()==ObjectId.Vidas){  // revisa si el objeto es un jugador 
+                
+                if(key == KeyEvent.VK_D){  // si se presiona la tecla D
+                    tempObject.setVelocidadX(5);
+                }
+                if(key == KeyEvent.VK_A){  // si se presiona la tecla A
+                    tempObject.setVelocidadX(-5);
+                }
+                /*if(key == KeyEvent.VK_SPACE && !tempObject.isSaltando()){ // si presiona espacio y no está saltando, salta (reduce posiciones en eje Y) 
+                    
+                    //tempObject.setSaltando(true);
+                    tempObject.setVelocidadY(-10);
+                }*/
+                if(key == KeyEvent.VK_W){
+                    int y=0;
+                    tempObject.setVelocidadY(-3);
+                }
+                /* Para hacer que la barra de vida también dispare 
+                if(key == KeyEvent.VK_SPACE){ 
+                    //despues del getX() y getY() se pueden restar o sumar valores para ajustar la posicion inicial de donde saldrá la bala
+                    //despues de getDireccion() se multiplica por el valor que queremos que sea nuestra velocidad de disparo (10, por ejemplo)
+                    handler.addObject(new Bala(tempObject.getX()+16,tempObject.getY(),ObjectId.Bala,tempObject.getDireccion()*10));
+                }*/
+               
+            }
         }
         
         
@@ -67,6 +93,19 @@ public class EntradaTeclado extends KeyAdapter{
             GameObject tempObject = handler.object.get(i); // recorre toda la lista de los enumeradores donde están enemigos, jugador, etc
             
             if(tempObject.getID()==ObjectId.Jugador){  // revisa si el objeto es un jugador 
+                
+                if(key == KeyEvent.VK_D){  // si se presiona la tecla D
+                    tempObject.setVelocidadX(0);
+                }
+                if(key == KeyEvent.VK_A){
+                    tempObject.setVelocidadX(0);
+                }
+                if(key == KeyEvent.VK_W){
+                    tempObject.setVelocidadY(0);
+                }
+            }
+            //Para detener la barra de vida al mismo tiempo que se detiene al jugador
+             if(tempObject.getID()==ObjectId.Vidas){  // revisa si el objeto es un jugador 
                 
                 if(key == KeyEvent.VK_D){  // si se presiona la tecla D
                     tempObject.setVelocidadX(0);
