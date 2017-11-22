@@ -23,9 +23,6 @@ public class Jugador extends GameObject {
     private float width = 48, height =96;
     private float gravedad = 0.5f;
     private final float MAXIMA_VELOCIDAD =10;
-    //private int facing = 1;  V15, animaciones
-    // 1 = derecha
-    // -1 = izquierda
     
     private Manejador handler;
     private Camara cam;
@@ -57,8 +54,7 @@ public class Jugador extends GameObject {
         
      
         colision(object);
-        
-       //jugadorCaminando.correrAnimacion();
+
        //avionIzquierda.correrAnimacion();
        
     }
@@ -119,30 +115,9 @@ public class Jugador extends GameObject {
      * Para dibujar el jugador. 
      */
     public void render(Graphics g) {
-        
-      
-        g.setColor(Color.blue);
-       // if(velocidadX !=0){ // si se está moviendo, mostrar la animación correspondiente...
-            //if(facing==1){  // V15 ANIMACIONES
-                // jugadorCaminando.dibujarAnimacion(g, (int)x, (int)y,48,96);  //48 y 96 son la escala, para adaptar la imagen
-            //}else{
-                // avionIzquierda.dibujarAnimacion(g, (int)x, (int)y,48,96);
-            //}
-                
-        //}else{ // si no, muestra la imagen de cuando está quieto
-            // AVION NORMAL
-            //if (facing==1){
-           g.drawImage(tex.jugador[13], (int)x, (int)y, 60,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen) 
-           
-            //} else if(facing == -1){
-               // imagen de cuando está mirando hacia la izquierda
-            //}
-            
-            
-        //}
-        //g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);
-        
-       
+
+           g.drawImage(tex.jugador[13], (int)x, (int)y, 60,96, null);  // 60,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen) 
+
     }
 
     @Override

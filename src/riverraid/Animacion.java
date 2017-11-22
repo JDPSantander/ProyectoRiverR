@@ -35,7 +35,9 @@ public class Animacion {
         frames = args.length;
         
     }
-    
+    /**
+     * Metodo para correr imagen por imagen para recrear la animación. Inicia la animación
+     */
     public void correrAnimacion(){
         
         index++;
@@ -68,18 +70,37 @@ public class Animacion {
     }
     */
     
+    /**
+     * Dibuja la animación luego de llamar al metodo correr animación
+     * @param g recibe el objeto grafico
+     * @param x la coordenada en X donde será dibujada la animación
+     * @param y la coordenada en Y donde será dibujada la animación
+     */
     public void dibujarAnimacion(Graphics g, int x, int y){
         
         g.drawImage(imagenActual, x, y, null);
         
     }
-    
+    /**
+     * Dibuja la animación luego de llamar al metodo correr animación. Hace que las imagenes de la animación
+     * se adapten a la imagen original o a la escala que le pasemos por parametro
+     * @param g recibe el objeto grafico 
+     * @param x recibe la coordenada en X donde será dibujada la animación
+     * @param y recibe la coordenada en Y donde será dibujada la animación
+     * @param scaleX recibe la escala/tamaño (ancho) al cual serán adaptadas las imagenes de la animación
+     * @param scaleY recibe la escala/tamaño (altura) al cual serán adaptadas las imagenes de la animación
+     */
     public void dibujarAnimacion(Graphics g, int x, int y, int scaleX, int scaleY){
         
         g.drawImage(imagenActual, x, y, scaleX, scaleY, null);
         
     }
     
+    
+    /**
+     * Fija la velocidad de la animación
+     * @param speed 
+     */
     public void setVelocidadAnimacion(int speed){
         velocidad=speed;
     }

@@ -14,7 +14,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import objetos.Bloque;
 import objetos.Jugador;
-import objetos.Prueba;
 import objetos.Puerta;
 import objetos.Vidas;
 
