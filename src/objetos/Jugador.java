@@ -159,7 +159,7 @@ public class Jugador extends GameObject {
         //}else{ // si no, muestra la imagen de cuando está quieto
             // AVION NORMAL
             //if (facing==1){
-           g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen) 
+           g.drawImage(tex.jugador[13], (int)x, (int)y, 60,96, null);  // 48,96 es el tamaño que va a tener en el juego, lo adapta para que la imagen tome ese tamaño (agranda o decrece la imagen) 
            
             //} else if(facing == -1){
                // imagen de cuando está mirando hacia la izquierda

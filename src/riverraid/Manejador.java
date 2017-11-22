@@ -91,7 +91,7 @@ public class Manejador {
                 //Para verificar si el pixel en el que nos encontramos es de color blanco (lo que supone son nuestros bloques)
                 if (rojo == 255 && verde == 255 && azul ==255){ //255 es el maximo valor en el espectro de colores
                  
-                    addObject(new Bloque(xx*32, yy*32,1, ObjectId.Bloque)); // Agrega un bloque en cada pixel blanco
+                    addObject(new Bloque(xx*32, yy*32,2, ObjectId.Bloque)); // Agrega un bloque en cada pixel blanco
                 }    
                 //Para verificar si el pixel en el que nos encontramos es de color azul (lo que supone es nuestro jugador)
                 if (rojo == 0 && verde == 0 && azul ==255){ //esta combinación de colores es igual a azul puro

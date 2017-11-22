@@ -31,7 +31,7 @@ public class Juego extends Canvas implements Runnable{
     //Objetos
     Camara cam;
     Manejador manejador;
-    public BufferedImage level = null, fondo = null; //  clouds = null; (14V)
+    public BufferedImage level = null, balas = null;// fondo = null; //  clouds = null; (14V)
     static Texturas tex;
     //private Vidas vida;
     
@@ -49,7 +49,8 @@ public class Juego extends Canvas implements Runnable{
         
         BufferedImageLoader loader = new BufferedImageLoader();
         level = loader.loadImage("/nivel.png");  // cargando el nivel
-        fondo = loader.loadImage("/back_1.png"); //(14V)
+        //fondo = loader.loadImage("/back_1.png"); 
+        balas = loader.loadImage("/disparo.png");
         
         
         cam = new Camara(0,0);
@@ -160,12 +161,12 @@ public class Juego extends Canvas implements Runnable{
          //Pinta el fondo tantas veces en X y Y como querramos, tomando en cuenta el ancho y alto de la imagen para repetirla sin superponerlas
         
        
-        for(int xx=0; xx<fondo.getWidth()*50; xx+= fondo.getWidth()){
+       /*for(int xx=0; xx<fondo.getWidth()*50; xx+= fondo.getWidth()){
             for(int yy=0; yy<fondo.getHeight()*50; yy+= fondo.getHeight()){
                 g.drawImage(fondo, xx, yy, this);
             }
                
-        }
+        }*/
         manejador.render(g);    // Es afectado por el inicio y el final de la camara
         //vida.render(g);
         

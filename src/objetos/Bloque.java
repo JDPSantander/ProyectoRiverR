@@ -40,6 +40,9 @@ public class Bloque extends GameObject{
        if(type==1){
            G.drawImage(tex.bloque[1], (int)x, (int)y,32,32, null);
        }
+       if(type==2){
+           G.drawImage(tex.bloque[2], (int)x, (int)y,32,32, null);
+       }
        
        
     }
