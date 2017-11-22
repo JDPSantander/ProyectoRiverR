@@ -17,6 +17,7 @@ public abstract class GameObject {
     protected boolean cayendo = true;
     protected boolean saltando = false;
     protected int direccion = -1;  //V16 facing
+    protected int eliminado =1;
     
     public GameObject(float x, float y, ObjectId id){
         this.x=x;
@@ -87,6 +88,14 @@ public abstract class GameObject {
     
     public int getDireccion(){
         return direccion;
+    }
+    
+    public void setElimineado(int eliminado){
+        this.eliminado=eliminado;
+    }
+    
+    public int getEliminado(){
+        return eliminado;
     }
     
 }

@@ -28,17 +28,13 @@ public class EntradaTeclado extends KeyAdapter{
             
             if(tempObject.getID()==ObjectId.Jugador){  // revisa si el objeto es un jugador 
                 
-                if(key == KeyEvent.VK_D){  // si se presiona la tecla D
+                if(key == KeyEvent.VK_D){  
                     tempObject.setVelocidadX(5);
                 }
-                if(key == KeyEvent.VK_A){  // si se presiona la tecla A
+                if(key == KeyEvent.VK_A){  
                     tempObject.setVelocidadX(-5);
                 }
-                /*if(key == KeyEvent.VK_SPACE && !tempObject.isSaltando()){ // si presiona espacio y no está saltando, salta (reduce posiciones en eje Y) 
-                    
-                    //tempObject.setSaltando(true);
-                    tempObject.setVelocidadY(-10);
-                }*/
+        
                 if(key == KeyEvent.VK_W){
                     int y=0;
                     tempObject.setVelocidadY(-3);
@@ -46,7 +42,7 @@ public class EntradaTeclado extends KeyAdapter{
                 if(key == KeyEvent.VK_SPACE){ 
                     //despues del getX() y getY() se pueden restar o sumar valores para ajustar la posicion inicial de donde saldrá la bala
                     //despues de getDireccion() se multiplica por el valor que queremos que sea nuestra velocidad de disparo (10, por ejemplo)
-                    handler.addObject(new Bala(tempObject.getX()+16,tempObject.getY(),ObjectId.Bala,tempObject.getDireccion()*10));
+                    handler.addObject(new Bala(tempObject.getX()+23,tempObject.getY()-30,ObjectId.Bala,tempObject.getDireccion()*10,handler));
                 }
                
             }
@@ -59,21 +55,12 @@ public class EntradaTeclado extends KeyAdapter{
                 if(key == KeyEvent.VK_A){  // si se presiona la tecla A
                     tempObject.setVelocidadX(-5);
                 }
-                /*if(key == KeyEvent.VK_SPACE && !tempObject.isSaltando()){ // si presiona espacio y no está saltando, salta (reduce posiciones en eje Y) 
-                    
-                    //tempObject.setSaltando(true);
-                    tempObject.setVelocidadY(-10);
-                }*/
+
                 if(key == KeyEvent.VK_W){
                     int y=0;
                     tempObject.setVelocidadY(-3);
                 }
-                /* Para hacer que la barra de vida también dispare 
-                if(key == KeyEvent.VK_SPACE){ 
-                    //despues del getX() y getY() se pueden restar o sumar valores para ajustar la posicion inicial de donde saldrá la bala
-                    //despues de getDireccion() se multiplica por el valor que queremos que sea nuestra velocidad de disparo (10, por ejemplo)
-                    handler.addObject(new Bala(tempObject.getX()+16,tempObject.getY(),ObjectId.Bala,tempObject.getDireccion()*10));
-                }*/
+             
                
             }
         }
@@ -94,7 +81,7 @@ public class EntradaTeclado extends KeyAdapter{
             
             if(tempObject.getID()==ObjectId.Jugador){  // revisa si el objeto es un jugador 
                 
-                if(key == KeyEvent.VK_D){  // si se presiona la tecla D
+                if(key == KeyEvent.VK_D){ 
                     tempObject.setVelocidadX(0);
                 }
                 if(key == KeyEvent.VK_A){
@@ -105,7 +92,7 @@ public class EntradaTeclado extends KeyAdapter{
                 }
             }
             //Para detener la barra de vida al mismo tiempo que se detiene al jugador
-             if(tempObject.getID()==ObjectId.Vidas){  // revisa si el objeto es un jugador 
+             if(tempObject.getID()==ObjectId.Vidas){  // revisa si el objeto es una barra de vida
                 
                 if(key == KeyEvent.VK_D){  // si se presiona la tecla D
                     tempObject.setVelocidadX(0);

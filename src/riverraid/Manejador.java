@@ -111,13 +111,10 @@ public class Manejador {
                     
                 }
                 if( rojo == 34 && verde == 177 && azul == 76){
-                    addObject(new Vidas(xx*32,yy*32,this,cam,ObjectId.Vidas));
+                    addObject(new Vidas(xx*31-140,yy*31,this,cam,ObjectId.Vidas));
                 }
                 
-                /*if (rojo == 34 && verde == 177 && azul ==76){ //esta combinación de colores es igual a azul puro
-                 
-                    manejador.addObject(new Bloque(xx*32, yy*32,1, ObjectId.Bloque)); // Agrega nuestro jugador (bloque azul) en el pixel azul
-                } */
+               
             }
         }
     }
@@ -164,22 +161,5 @@ public class Manejador {
         object.clear();
     }
     
-    /**
-     * Crea los bloques del nivel
-     */
-    /*
-    public void crearNivel(){
-        
-        for(int yy=0; yy < Juego.HEIGHT+32 ; yy+=32){
-            addObject(new Bloque(0,yy,ObjectId.Bloque));
-        }
-        
-        for(int xx=0; xx < Juego.WIDTH*2 ; xx+=32){
-            addObject(new Bloque(xx,Juego.HEIGHT-32,ObjectId.Bloque));
-        }
-        
-        for(int xx=200; xx < 600 ; xx+=32){
-            addObject(new Bloque(xx,400,ObjectId.Bloque));
-        }
-    }*/
+
 }

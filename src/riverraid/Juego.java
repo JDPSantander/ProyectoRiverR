@@ -132,8 +132,8 @@ public class Juego extends Canvas implements Runnable{
      * una imagen o ventana que ha sido cargada con anterioridad, la principal se muestra por pantalla y las otras dos
      * se ubican detrás de la ventana principal; este ciclo se repite cada vez que la imagen que está al frente deja de 
      * usarse y la de atrás pasa a ser la principal, cargando así otras dos imagenes detrás de esta nueva
-     * para tenerlas listas al momento de ser necesitadas
-     * 
+     * para tenerlas listas al momento de ser necesitadas. Además, aquí se usa la clase cámara para enfocar la pantalla 
+     * en donde está nuestro jugador
      */
     private void render(){
         BufferStrategy bs = this.getBufferStrategy();
@@ -158,15 +158,7 @@ public class Juego extends Canvas implements Runnable{
         // todas las coordenadas usada en las operaciones de renderizado subsecuentes sobre este contexto gráfico son relativas a este nuevo origen
         
         g2d.translate(cam.getX(), cam.getY()); //inicio de la camara
-         //Pinta el fondo tantas veces en X y Y como querramos, tomando en cuenta el ancho y alto de la imagen para repetirla sin superponerlas
-        
-       
-       /*for(int xx=0; xx<fondo.getWidth()*50; xx+= fondo.getWidth()){
-            for(int yy=0; yy<fondo.getHeight()*50; yy+= fondo.getHeight()){
-                g.drawImage(fondo, xx, yy, this);
-            }
-               
-        }*/
+      
         manejador.render(g);    // Es afectado por el inicio y el final de la camara
         //vida.render(g);
         

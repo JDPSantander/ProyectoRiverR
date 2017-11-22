@@ -29,22 +29,16 @@ public class Jugador extends GameObject {
     
     private Manejador handler;
     private Camara cam;
-    
+    private Vidas vida;
     Texturas tex = Juego.getInstancia();
     
-    //V13 Y V15, OJO: PARA ANIMACIONES
-    //private Animacion jugadorCaminando, avionIzquierda, avionDerecha, avionSaltando;
-    
+  
 
     public Jugador(float x, float y, Manejador handler, Camara cam, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
         this.cam=cam;
         
-        //OJO: V13 Y V15 ANIMACIONES
-        // 10 es la velocidad con que esta animación se repetirá, puede ser modificado a conveniencia 
-        //jugadorCaminando = new Animacion(10, tex.jugador[1],tex.jugador[2],tex.jugador[3],tex.jugador[4],tex.jugador[5],tex.jugador[6]);
-        //avionIzquierda = new Animacion(10, tex.jugador[7],tex.jugador[8],tex.jugador[9],tex.jugador[10],tex.jugador[11],tex.jugador[12]);
     }
     
     /**
@@ -57,28 +51,11 @@ public class Jugador extends GameObject {
         x += velocidadX;
         y--;    // Mueve el avion automaticamente hacia arriba 
         y += velocidadY;
-        
-        //V15: MAS DE ANIMACIONES
-        
-        /*
-         if(velX<0{   // si se está moviendo hacia la izquierda...
-            facing = -1;
-         }else if(velX >0){   // si se está moviendo hacia la derecha...
-            facing = 1;
-         }
-        */
-        
-        
+        //vida = new Vidas(getX(),getY(),ObjectId.Vidas);
+  
         //y += velocidadY;   // Para mover el avion manualmente hacia arriba
         
-        /* Verifica si el avion está cayendo o saltando para crear el efecto de gravedad
-        if( cayendo || saltando){
-            velocidadY += gravedad;
-            if(velocidadY>MAXIMA_VELOCIDAD){
-                velocidadY=MAXIMA_VELOCIDAD;
-            }
-        }*/
-        
+     
         colision(object);
         
        //jugadorCaminando.correrAnimacion();
@@ -106,11 +83,7 @@ public class Jugador extends GameObject {
                 if(getBounds().intersects(tempObject.getBounds())){  // si los bordes del jugador intersectan con los bordes del bloque inferior...
                     y=tempObject.getY() - height;  // para que el jugador quede justo encima del bloque y alinearlo con el piso
                     velocidadY=0;   //velocidad del jugador en el eje Y = 0
-                    cayendo=false; // ya no está cayendo
-                    saltando=false; // no salta
-                }
-                else{  // si no está tocando el borde inferior, entonces está cayendo de nuevo y regresa a tocar el borde/piso
-                    cayendo=true;
+                    
                 }
 
                 if(getBoundsDerecha().intersects(tempObject.getBounds())){  // si los bordes del jugador intersectan con los bordes de la derecha...
@@ -126,28 +99,28 @@ public class Jugador extends GameObject {
                    
                 }
                 
+            } else if(tempObject.getID() == ObjectId.Enemigos){
+                if(getBounds().intersects(tempObject.getBounds()) || getBoundsIzquierda().intersects(tempObject.getBounds()) || getBoundsDerecha().intersects(tempObject.getBounds())){
+                    //y = tempObject.getY()+70;
+                    Vidas.VIDA-=34;
+                    //vida.setX(vida.getX());
+                    //vida.setY(vida.getY());
+                    if(Vidas.VIDA<=0){
+                        Vidas.VIDA=0;
+                        // OPCIONES DE PERDER
+                    }
+                }
             }
         }
     }
 
     @Override
     /**
-     * Para dibujar el jugador. 2) Convierte la variable de la gráfica en una variable de gráfica 2D para crear las cajas 
+     * Para dibujar el jugador. 
      */
     public void render(Graphics g) {
         
-        //if(jumping){
-                // if(facing==1){
-                        //g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  //tex.jugador[numero] será la imagen
-                //} else if(facing== -1){
-                        //g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);  //tex.jugador[numero] será la imagen
-                //}          
-        //} else{
-        
-            //COPIAR AQUÍ TODO EL CODIGO QUE ESTÁ ABAJO
-            
-        //}
-        
+      
         g.setColor(Color.blue);
        // if(velocidadX !=0){ // si se está moviendo, mostrar la animación correspondiente...
             //if(facing==1){  // V15 ANIMACIONES
@@ -169,18 +142,7 @@ public class Jugador extends GameObject {
         //}
         //g.drawImage(tex.jugador[0], (int)x, (int)y, 48,96, null);
         
-        
-       /* para pintar el rectangulo azul que es nuestro viejo jugador
-       */
-       //g.fillRect((int)x,(int)y,(int)width,(int)height);
        
-       //Graphics2D g2d = (Graphics2D) g; 
-       /*                       Para colorear los bordes del jugador para las colisiones
-       g2d.setColor(Color.red);
-       g2d.draw(getBounds());           
-       g2d.draw(getBoundsDerecha());
-       g2d.draw(getBoundsIzquierda());
-       g2d.draw(getBoundsArriba()); */
     }
 
     @Override

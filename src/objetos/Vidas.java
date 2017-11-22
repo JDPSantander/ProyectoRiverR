@@ -21,12 +21,15 @@ public class Vidas extends GameObject{
     Manejador handler;
     Camara cam;
     
-    
-    //SIGUE EXISTIENDO UN BUG: CUANDO EL AVION SE DETIENE, LA VIDA SIGUE AVANZANDO
+   
     public Vidas(float x, float y,Manejador handler, Camara cam, ObjectId id) {
         super(x, y, id);
         this.handler = handler;
         this.cam=cam;
+    }
+    public Vidas(float x, float y, ObjectId id) {
+        super(x, y, id);
+        
     }
 
     
@@ -49,7 +52,7 @@ public class Vidas extends GameObject{
     @Override
     public void tick(LinkedList<GameObject> object) {
         x += velocidadX;
-        y--;    // Mueve el avion automaticamente hacia arriba 
+        y--;    // Mueve la barra de vida hacia arriba
         y += velocidadY;
     }
 

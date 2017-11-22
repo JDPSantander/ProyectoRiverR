@@ -80,6 +80,10 @@ public class Animacion {
         
     }
     
+    public void setVelocidadAnimacion(int speed){
+        velocidad=speed;
+    }
+    
     //SE PUEDEN CREAR GETTERS Y SETTERS DE ACUERDO A CÓMO DESEAMOS INTERACTUAR CON LAS ANIMACIONES, PARA REINICIAR EL CONTADOR
     // CADA VEZ QUE ENTRA A UNA ANIMACION, O REINICIAR LA VELOCIDAD, ETC.
     
